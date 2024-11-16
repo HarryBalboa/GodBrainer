@@ -15,7 +15,7 @@ onMounted(async () =>{
 </script>
 
 <template>
-  <div class="font-brand text-white h-screen w-screen bg-gradient-to-t from-cyan-800 to-emerald-600">
+  <div class="font-brand text-white h-screen w-screen bg-[url('./background.svg')]  select-none">
     <div class="flex items-center gap-4 p-2 h-[48px] text-xl">
       <div class="flex items-center gap-1">
 <!--        <img src="/favicon.png" alt="" class="w-8">-->
@@ -27,8 +27,8 @@ onMounted(async () =>{
       <div class="flex items-center gap-2 h-8">
 
         <RouterLink class="hover:bg-white/20 hover:scale-105 p-2 rounded-b-lg" to="/game-view">Game</RouterLink>
-        <RouterLink class="hover:bg-white/20 hover:scale-105 p-2 rounded-b-lg" to="/game-master-view">master</RouterLink>
-        <RouterLink class="hover:bg-white/20 hover:scale-105 p-2 rounded-b-lg" to="/management-view">management</RouterLink>
+        <RouterLink class="hover:bg-white/20 hover:scale-105 p-2 rounded-b-lg" to="/game-master-view">Quiz master</RouterLink>
+        <RouterLink class="hover:bg-white/20 hover:scale-105 p-2 rounded-b-lg" to="/management-view">Game creator</RouterLink>
       </div>
     </div>
     <div class="h-[calc(100%-48px)] px-4 pb-2" v-if="isReady">

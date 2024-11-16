@@ -4,9 +4,7 @@ declare type TDBEntry = {
 
 declare type TPlayer = {
     name: string,
-    score: number,
     profilePicture?: Blob,
-    jokers?: TJoker[]
 }
 
 declare type TJoker = {
@@ -28,6 +26,9 @@ declare type TQuestion = {
 declare type TBasicGame = {
     name: string,
     players: TPlayer[],
+    playerData: {playerId: number, score: number, jokers?: TJoker[]},
+    questionData: {questionId: number, isClosed: boolean},
+    multiplier: number,
     questions: TQuestion[],
     currentQuestion: number
 }
@@ -35,6 +36,9 @@ declare type TBasicGame = {
 declare type TJeopardyGame = {
     name: string,
     players: TPlayer[],
+    playerData: {playerId: number, score: number, jokers?: TJoker[]},
+    questionData: {questionId: number, isClosed: boolean},
+    multiplier: number,
     categories:{
         name: string,
         questions: TQuestion[]
