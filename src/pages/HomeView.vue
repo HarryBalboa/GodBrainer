@@ -1,22 +1,23 @@
 <script setup lang="ts">
 
-import {nextTick, onMounted, watch} from "vue";
-import {useRoute} from "vue-router";
-const route = useRoute();
 
-watch (() => route.params.data, (val) =>{
-  console.log(val)
-})
-onMounted(() =>{
-  nextTick(() =>{
-    console.log(route.path);
-  })
+import {useDatabase} from "../stores/database.ts";
+const database = useDatabase();
 
-})
+async function getPlayers(){
+  const players = await database.getPlayers();
+  console.log(players);
+}
+
+
+
 </script>
 
 <template>
-Home
+  <div>
+    test
+    <button @click="getPlayers">get</button>
+  </div>
 </template>
 
 <style scoped>

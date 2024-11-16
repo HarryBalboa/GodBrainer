@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import {useCounterStore} from "../stores/database.ts";
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import {useDatabase} from "../stores/database.ts";
 
 const router = useRouter();
-const store = useCounterStore();
 
-console.log(store.count)
 
 const broadcastChannel = ref();
 
@@ -26,6 +24,14 @@ function sendMessage(msg){
   broadcastChannel.value.postMessage(JSON.stringify(msgObj));
 }
 
+
+const database = useDatabase();
+
+async function getPlayers(){
+  const players = await database.getPlayers();
+  console.log(players);
+}
+
 onMounted(() =>{
   connectToBroadcastChannel();
 })
@@ -35,6 +41,7 @@ onMounted(() =>{
 <div>
   <RouterLink target="_blank" :to="{path: '/GodBrainer/game-master-view', query:{data: 'test'}}">open</RouterLink>
   <button @click="sendMessage('yay')"> send</button>
+  <button @click="getPlayers">get</button>
 </div>
 </template>
 
