@@ -7,6 +7,11 @@ import GameMasterView from './pages/GameMasterView.vue';
 import GameView from './pages/GameView.vue';
 import ManagementView from './pages/ManagementView.vue';
 import { createMemoryHistory, createRouter } from "vue-router";
+import { OhVueIcon, addIcons } from "oh-vue-icons";
+import { GiBrain, FaGamepad } from "oh-vue-icons/icons";
+
+
+addIcons(GiBrain, FaGamepad);
 
 const routes = [
     { path: '/', component: HomeView, name: "home" },
@@ -22,4 +27,4 @@ const router = createRouter({
 
 const pinia = createPinia();
 
-createApp(App).use(router).use(pinia).mount('#app')
+createApp(App).component("v-icon", OhVueIcon).use(router).use(pinia).mount('#app')

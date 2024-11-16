@@ -2,6 +2,7 @@
 
 
 import {useDatabase} from "../stores/database.ts";
+import Tile from "../components/Tile.vue";
 const database = useDatabase();
 
 async function getPlayers(){
@@ -14,9 +15,8 @@ async function getPlayers(){
 </script>
 
 <template>
-  <div>
-    test
-    <button @click="getPlayers">get</button>
+  <div class="flex w-full h-full items-center justify-center">
+    <Tile text="Game" icon="fa-gamepad"></Tile>
   </div>
 </template>
 
