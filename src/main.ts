@@ -9,10 +9,10 @@ import ManagementView from './pages/ManagementView.vue';
 import { createMemoryHistory, createRouter } from "vue-router";
 
 const routes = [
-    { path: '/', component: HomeView },
-    { path: '/game-view', component: GameView },
-    { path: '/game-master-view', component: GameMasterView },
-    { path: '/management-view', component: ManagementView },
+    { path: '/', component: HomeView, name: "home" },
+    { path: '/game-view', component: GameView , name: "game"},
+    { path: '/game-master-view', component: GameMasterView, name: "master" },
+    { path: '/management-view', component: ManagementView, name: "manager" },
 ]
 
 const router = createRouter({
