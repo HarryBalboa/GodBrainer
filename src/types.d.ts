@@ -4,7 +4,7 @@ declare type TDBEntry = {
 
 declare type TPlayer = {
     name: string,
-    profilePicture?: Blob,
+    profilePicture?: string,
 }
 
 declare type TJoker = {

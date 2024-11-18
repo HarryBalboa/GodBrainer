@@ -15,7 +15,7 @@ onMounted(async () =>{
 </script>
 
 <template>
-  <div class="font-brand text-white h-screen w-screen bg-[url('./background.svg')]  select-none">
+  <div class="font-brand text-white h-screen w-screen bg-[url('./assets/background.svg')]  select-none">
     <div class="flex items-center gap-4 p-2 h-[48px] text-xl">
       <div class="flex items-center gap-1">
 <!--        <img src="/favicon.png" alt="" class="w-8">-->
