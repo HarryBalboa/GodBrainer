@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import PlayerManager from "../components/PlayerManager.vue";
 import QuestionManager from "./QuestionManager.vue";
+import GameManager from "../components/GameManager.vue";
 
 const tabs = [{text: "Players", icon: "fa-user-alt"}, {text: "Questions", icon: "fa-question-circle"}, {text: "Games", icon: "fa-gamepad"}]
 const currentTab = ref("Players");
@@ -27,6 +28,9 @@ const currentTab = ref("Players");
       </template>
       <template v-if="currentTab === 'Questions'">
         <question-manager></question-manager>
+      </template>
+      <template v-if="currentTab === 'Games'">
+        <game-manager></game-manager>
       </template>
     </div>
   </div>

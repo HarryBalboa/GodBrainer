@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+const emit = defineEmits(["change"])
 defineProps<{
   items: string[];
+  placeholder?: string;
 }>();
 
 const modelValue = defineModel<string>('modelValue');
@@ -22,6 +24,7 @@ watch(isActive, (val) => {
 function handleSelect(value : string) {
   modelValue.value = value;
   isActive.value = false;
+  emit('change', modelValue.value);
 }
 </script>
 
@@ -31,7 +34,8 @@ function handleSelect(value : string) {
         @click="isActive = true"
         class="w-full p-1 bg-sky-300/30 rounded flex justify-between items-center cursor-pointer"
     >
-      {{ modelValue }} <v-icon name="fa-chevron-down" />
+      {{ !modelValue ? placeholder : modelValue }}
+      <v-icon name="fa-chevron-down" />
     </div>
     <div v-if="isActive" class="absolute bg-cyan-500 rounded w-full top-9 z-10">
       <div

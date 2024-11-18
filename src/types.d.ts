@@ -24,25 +24,17 @@ declare type TQuestion = {
     hints?: string[]
 }
 
-declare type TBasicGame = {
+declare type TGame = {
     name: string,
-    players: TPlayer[],
-    playerData: {playerId: number, score: number, jokers?: TJoker[]},
-    questionData: {questionId: number, isClosed: boolean},
+    players: (TPlayer & TDBEntry)[],
+    type: "basic" | "jeopardy"
+    playerData: Record<number, {score: number, jokers?: {name: string, isUsed: boolean}}>,
+    questionData: Record<number, boolean>,
     multiplier: number,
-    questions: TQuestion[],
-    currentQuestion: number
-}
-
-declare type TJeopardyGame = {
-    name: string,
-    players: TPlayer[],
-    playerData: {playerId: number, score: number, jokers?: TJoker[]},
-    questionData: {questionId: number, isClosed: boolean},
-    multiplier: number,
-    categories:{
+    questions?: (TQuestion & TDBEntry)[],
+    currentQuestion?: number,
+    categories?:{
         name: string,
-        questions: TQuestion[]
+        questions: (TQuestion & TDBEntry)[]
     }[],
-    currentQuestion: number
 }
