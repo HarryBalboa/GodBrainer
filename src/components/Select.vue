@@ -29,7 +29,7 @@ function handleSelect(value : string) {
   <div class="relative" ref="element">
     <div
         @click="isActive = true"
-        class="w-full p-1 bg-cyan-500/30 rounded flex justify-between items-center cursor-pointer"
+        class="w-full p-1 bg-sky-300/30 rounded flex justify-between items-center cursor-pointer"
     >
       {{ modelValue }} <v-icon name="fa-chevron-down" />
     </div>

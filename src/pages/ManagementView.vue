@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import PlayerManager from "../components/PlayerManager.vue";
+import QuestionManager from "./QuestionManager.vue";
 
-const tabs = [{text: "Player", icon: "fa-user-alt"}, {text: "Questions", icon: "fa-question-circle"}, {text: "Games", icon: "fa-gamepad"}]
-const currentTab = ref("Player");
+const tabs = [{text: "Players", icon: "fa-user-alt"}, {text: "Questions", icon: "fa-question-circle"}, {text: "Games", icon: "fa-gamepad"}]
+const currentTab = ref("Players");
 </script>
 
 <template>
@@ -21,11 +22,11 @@ const currentTab = ref("Player");
       </div>
     </div>
     <div>
-      <template v-if="currentTab === 'Player'">
+      <template v-if="currentTab === 'Players'">
         <PlayerManager></PlayerManager>
       </template>
       <template v-if="currentTab === 'Questions'">
-<!--        <question-manager></question-manager>-->
+        <question-manager></question-manager>
       </template>
     </div>
   </div>

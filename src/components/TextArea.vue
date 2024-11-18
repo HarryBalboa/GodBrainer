@@ -1,14 +1,10 @@
 <script setup lang="ts">
-const modelValue = defineModel('modelValue');
-defineProps<{
-  type?: string
-}>();
+const modelValue = defineModel<string>();
 </script>
 
 <template>
-  <input
+  <textarea
       v-model="modelValue"
-      :type="type || 'text'"
       class="w-full p-1 bg-sky-300/30 rounded focus:outline-none"
   />
 </template>

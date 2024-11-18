@@ -17,10 +17,11 @@ declare type TQuestion = {
     gameMasterInfo?: string,
     playerInfo?: string
     type: "video" | "audio" | "text" | "zoom" | "image",
-    file?: Blob,
+    file?: string,
     text?: string,
     points: number,
     penalty: number,
+    hints?: string[]
 }
 
 declare type TBasicGame = {

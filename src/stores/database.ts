@@ -7,7 +7,7 @@ export const useDatabase = defineStore('useDatabase',  () => {
     const database = ref<IDBDatabase>();
     const setupDB = async () : Promise<IDBDatabase> => {
         return new Promise((resolve, reject) => {
-            const request = window.indexedDB.open('BrainBrawl', 1);
+            const request = window.indexedDB.open('GodBrainer', 1);
             request.onerror = (ev: any) => {
                 console.error(`Database error: ${(ev.target).errorCode}`);
                 reject(ev);
@@ -20,11 +20,11 @@ export const useDatabase = defineStore('useDatabase',  () => {
 
             request.onupgradeneeded = (ev) => {
                 const db = (ev.target as IDBOpenDBRequest).result;
-                const userObjectStore = db.createObjectStore('players', {
+                const playerObjectStore = db.createObjectStore('players', {
                     keyPath: 'id',
                     autoIncrement: true,
                 });
-                userObjectStore.createIndex('name', 'name', { unique: false });
+                playerObjectStore.createIndex('name', 'name', { unique: false });
 
                 const gameObjectStore = db.createObjectStore("games", {
                     keyPath: "id",
@@ -44,8 +44,8 @@ export const useDatabase = defineStore('useDatabase',  () => {
     const getPlayers = async ()  =>{
         return new Promise((resolve, reject) => {
             const playerRequest = database.value!
-                .transaction('users')
-                .objectStore('users')
+                .transaction('players')
+                .objectStore('players')
                 .getAll();
 
             playerRequest.onerror = (ev : any) => {
@@ -61,8 +61,8 @@ export const useDatabase = defineStore('useDatabase',  () => {
     const getPlayer  = async (playerId : number) => {
         return new Promise((resolve, reject) => {
             const playerRequest = database.value!
-                .transaction('users')
-                .objectStore('users')
+                .transaction('players')
+                .objectStore('players')
                 .get(playerId);
 
             playerRequest.onerror = (ev : any) => {
@@ -78,8 +78,8 @@ export const useDatabase = defineStore('useDatabase',  () => {
     const addPlayer = async (player: TPlayer) => {
         return new Promise((resolve, reject) => {
             const request = database.value!
-                .transaction(['users'], 'readwrite')
-                .objectStore('users')
+                .transaction(['players'], 'readwrite')
+                .objectStore('players')
                 .add(player);
 
             request.onerror = (ev :any) => {
@@ -96,8 +96,8 @@ export const useDatabase = defineStore('useDatabase',  () => {
     const removePlayer = async (playerId: number) => {
         return new Promise((resolve, reject) => {
             const request = database.value!
-                .transaction(['users'], 'readwrite')
-                .objectStore('users')
+                .transaction(['players'], 'readwrite')
+                .objectStore('players')
                 .delete(playerId);
 
             request.onerror = (ev:any) => {
@@ -114,8 +114,8 @@ export const useDatabase = defineStore('useDatabase',  () => {
     const updatePlayer = async (player: TPlayer & TDBEntry) => {
         return new Promise((resolve, reject) => {
             const request = database.value!
-                .transaction(['users'], 'readwrite')
-                .objectStore('users')
+                .transaction(['players'], 'readwrite')
+                .objectStore('players')
                 .put(player);
 
             request.onerror = (ev : any) => {
