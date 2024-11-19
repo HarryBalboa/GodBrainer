@@ -8,10 +8,10 @@ import GameView from './pages/GameView.vue';
 import ManagementView from './pages/ManagementView.vue';
 import { createMemoryHistory, createRouter } from "vue-router";
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { GiBrain, FaGamepad, FaUserTie, FaEdit, FaUserAlt, FaQuestionCircle, FaChevronDown, FaTrashAlt, FaTimes, FaPlus     } from "oh-vue-icons/icons";
+import { GiBrain, FaGamepad, FaUserTie, FaEdit, FaUserAlt, FaQuestionCircle, FaChevronDown, FaTrashAlt, FaTimes, FaPlus, FaExternalLinkAlt, FaPlay, FaCrown, FaPause, FaArrowLeft, FaUndoAlt     } from "oh-vue-icons/icons";
 
 
-addIcons(GiBrain, FaGamepad, FaUserTie, FaEdit, FaUserAlt, FaQuestionCircle, FaChevronDown, FaTrashAlt, FaTimes, FaPlus   );
+addIcons(GiBrain, FaGamepad, FaUserTie, FaEdit, FaUserAlt, FaQuestionCircle, FaChevronDown, FaTrashAlt, FaTimes, FaPlus, FaExternalLinkAlt, FaPlay, FaCrown, FaPause, FaArrowLeft, FaUndoAlt   );
 
 const routes = [
     { path: '/', component: HomeView, name: "home" },

@@ -31,7 +31,7 @@ onMounted(async () =>{
         <RouterLink class="hover:bg-white/20 hover:scale-105 p-2 rounded-b-lg" to="/management-view">Game creator</RouterLink>
       </div>
     </div>
-    <div class="h-[calc(100%-48px)] px-4 pb-2" v-if="isReady">
+    <div class="h-[calc(100%-48px)] w-full p-2" v-if="isReady">
       <RouterView></RouterView>
     </div>
   </div>

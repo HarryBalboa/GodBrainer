@@ -1,3 +1,9 @@
+declare type TMessage = {
+    sender: "master" | "player",
+    command: "updateGame" | "selectQuestion" | "closeQuestion"
+    data: any
+}
+
 declare type TDBEntry = {
     id: number
 }
