@@ -22,7 +22,7 @@ declare type TQuestion = {
     name: string,
     gameMasterInfo?: string,
     playerInfo?: string
-    type: "video" | "audio" | "text" | "zoom" | "image",
+    type: "video" | "audio" | "text" | "zoom" | "img",
     file?: string,
     text?: string,
     points: number,

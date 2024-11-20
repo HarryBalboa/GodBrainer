@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import {onMounted, ref, computed} from "vue";
-import {useDatabase} from "../stores/database.ts";
+
 import BasicImage from "../components/BasicImage.vue";
 import ZoomImage from "../components/ZoomImage.vue";
 import AudioPlayer from "../components/AudioPlayer.vue";
 import VideoPlayer from "../components/VideoPlayer.vue";
 import BasicQuestion from "../components/BasicQuestion.vue";
 
-const database = useDatabase();
 const broadcastChannel = ref();
 const curGame = ref<TGame & TDBEntry>();
 const currentQuestion = ref<TQuestion & TDBEntry>();
@@ -24,11 +23,20 @@ function connectToBroadcastChannel(){
   broadcastChannel.value.onmessage = (ev: MessageEvent) =>{
     const msg = JSON.parse(ev.data) as TMessage
     if(msg.command === "updateGame"){
+      console.log(msg.data);
+      if(curGame.value?.id && curGame.value.id !== msg.data.id){
+        console.log(curGame.value.id, msg.data.id)
+        currentQuestion.value = undefined;
+      }
       curGame.value = msg.data;
+      if(curGame.value && curGame.value.type === "basic"){
+        currentQuestion.value = curGame.value!.questions![curGame.value!.currentQuestion!]
+      }
     } else if(msg.command === "closeQuestion"){
       currentQuestion.value = undefined;
+    } else if(msg.command === "selectQuestion"){
+      currentQuestion.value = msg.data;
     }
-    console.log(msg)
   }
 }
 
@@ -47,12 +55,10 @@ function selectQuestion(question : TQuestion & TDBEntry){
 
 const playerRanking = computed(() =>{
   if(!curGame.value) return [];
-  return curGame.value.players.sort((a,b) => curGame.value!.playerData[a.id].score > curGame.value!.playerData[b.id].score ? 1 : -1)
+  const game = JSON.parse(JSON.stringify(curGame.value))
+  if(!game) return [];
+  return game.players.sort((a,b) => game.playerData[a.id].score > game.playerData[b.id].score ? 1 : -1)
 })
-
-
-
-
 
 onMounted(() =>{
   connectToBroadcastChannel();
@@ -61,7 +67,6 @@ onMounted(() =>{
 
 <template>
 <div class="h-full w-full overflow-hidden">
-  {{ curGame ? curGame.name: "-"}}
   <template v-if="curGame">
     <div class="h-[85%]">
       <template v-if="curGame.type==='jeopardy'">
@@ -84,7 +89,7 @@ onMounted(() =>{
 							"
                   @click="selectQuestion(question)"
               >
-                {{ question.points }}
+                {{ question.points * curGame.multiplier }}
               </div>
             </div>
           </div>
@@ -98,15 +103,23 @@ onMounted(() =>{
           </div>
         </template>
       </template>
+      <template v-if="curGame.type==='basic'">
+        <div v-if="currentQuestion" class="h-[95%]">
+          <component
+              :is="componentMapping[currentQuestion.type]"
+              v-model="currentQuestion"
+          ></component>
+        </div>
+      </template>
     </div>
     <div class="h-[15%] flex justify-center">
       <div class="flex gap-4">
-        <div v-for="(player, i) in playerRanking" class="flex flex-col justify-center items-center">
-          <img v-if="player.profilePicture" :src="player.profilePicture" alt="" class="h-8 w-8 rounded-full" :class="i === playerRanking.length - 1 ? 'animate-bounce' : '' ">
-          <div>
+        <div v-for="(player, i) in playerRanking" class="flex flex-col justify-center items-center" :key="player.id">
+          <div class="text-lg">
             {{ player.name }}
-            <v-icon v-if="i === playerRanking.length - 1" name="fa-crown"></v-icon>
+            <v-icon v-if="i === playerRanking.length - 1" name="fa-crown" :class="i === playerRanking.length - 1 ? 'animate-bounce' : '' "></v-icon>
           </div>
+          <img v-if="player.profilePicture" :src="player.profilePicture" alt="" class="h-12 w-12 rounded-full" >
           <div>
             {{ curGame.playerData[player.id].score }}
           </div>

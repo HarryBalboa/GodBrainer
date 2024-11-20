@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 	import { ref, computed } from 'vue';
 	const question = defineModel();
 
@@ -18,8 +18,12 @@
 		@contextmenu.prevent="handleRightClick"
 	>
 		<div class="text-center">
-			<div class="text-9xl animate-pulse">?</div>
-<!--			<div class="text-4xl">{{ question.points }} Points</div>-->
+      <div v-if="!isActive" class="flex flex-col items-center justify-center">
+        <div class="text-9xl animate-bounce">?</div>
+        <div class="text-4xl">
+          {{ question.playerInfo }}
+        </div>
+      </div>
 			<div v-if="isActive" class="w-full h-full p-4">
 				<audio controls :src="source" />
 			</div>
