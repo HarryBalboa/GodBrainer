@@ -141,7 +141,7 @@ onUnmounted( async () =>{
   <div class="h-full w-full">
     <div class="flex gap-2 items-center h-[40px]">
       <Select class="w-48" placeholder="Select Game" v-model="selectedGame" :items="games.map(g => g.name)" @change="selectGame"></Select>
-      <RouterLink target="_blank" to="/" class="hover:bg-white/20 flex items-center justify-center rounded-full h-8 w-8 cursor-pointer">
+      <RouterLink target="_blank" to="/GodBrainer" class="hover:bg-white/20 flex items-center justify-center rounded-full h-8 w-8 cursor-pointer">
         <v-icon name="fa-external-link-alt"></v-icon>
       </RouterLink>
       <div class="hover:bg-white/20 flex items-center justify-center rounded-full h-8 w-8 cursor-pointer" @click="resetGame">
